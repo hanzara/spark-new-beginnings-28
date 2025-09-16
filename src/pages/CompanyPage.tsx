@@ -46,24 +46,6 @@ const CompanyPage = () => {
     "Real-time notifications and alerts"
   ];
 
-  const businessModel = [
-    {
-      title: "Freemium & Premium Subscriptions",
-      description: "Basic features free, advanced tools for premium members"
-    },
-    {
-      title: "Transaction Fees",
-      description: "Small fees on withdrawals, contributions, and investments"
-    },
-    {
-      title: "Data Analytics",
-      description: "Insights and reporting services (with user consent)"
-    },
-    {
-      title: "Strategic Partnerships",
-      description: "Collaborations with banks, SACCOs, and institutional investors"
-    }
-  ];
 
   const teamMembers = [
     {
@@ -388,27 +370,208 @@ const CompanyPage = () => {
         </div>
       </section>
 
-      {/* Business Model Section */}
+      {/* How It Works - Feature Cycles */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center space-y-4 mb-16">
             <h2 className="text-3xl lg:text-4xl font-bold text-foreground">
-              How We Generate Revenue
+              How ChamaWallet Works
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Sustainable business model designed to scale with our community
+              Experience the complete cycle of digital group savings and financial management
             </p>
           </div>
           
-          <div className="grid md:grid-cols-2 gap-8">
-            {businessModel.map((model, index) => (
-              <Card key={index} className="border-border hover:border-primary/50 transition-colors bg-background/50 backdrop-blur-sm">
-                <CardContent className="p-6 space-y-4">
-                  <h3 className="text-xl font-semibold text-foreground">{model.title}</h3>
-                  <p className="text-muted-foreground">{model.description}</p>
-                </CardContent>
-              </Card>
-            ))}
+          {/* Feature Flow Steps */}
+          <div className="space-y-20">
+            {/* Step 1: Join & Create */}
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div className="space-y-6">
+                <div className="flex items-center space-x-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-kenyan-green to-primary rounded-full flex items-center justify-center text-kenyan-green-foreground font-bold text-lg">
+                    1
+                  </div>
+                  <h3 className="text-2xl lg:text-3xl font-bold text-foreground">
+                    Join or Create Your Chama
+                  </h3>
+                </div>
+                <p className="text-lg text-muted-foreground">
+                  Start by joining an existing chama or creating your own group. Set up your digital wallets 
+                  automatically - a chama savings wallet and your personal Merry-Go-Round wallet for monthly payouts.
+                </p>
+                <div className="space-y-3">
+                  <div className="flex items-center space-x-3">
+                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0" />
+                    <span className="text-foreground">Instant wallet creation</span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0" />
+                    <span className="text-foreground">Secure PIN setup</span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0" />
+                    <span className="text-foreground">Role assignment (Treasurer, Secretary, etc.)</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="relative">
+                <img 
+                  src={communitySuccessImage} 
+                  alt="Chama members joining together" 
+                  className="rounded-2xl shadow-2xl w-full h-auto"
+                />
+                <div className="absolute -inset-4 bg-gradient-to-r from-kenyan-green/20 to-primary/10 rounded-3xl blur-2xl -z-10"></div>
+                <div className="absolute top-4 right-4 w-16 h-16 bg-gradient-to-r from-kenyan-green to-primary rounded-2xl flex items-center justify-center shadow-xl">
+                  <Users className="h-8 w-8 text-kenyan-green-foreground" />
+                </div>
+              </div>
+            </div>
+
+            {/* Step 2: Contribute */}
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div className="relative order-2 lg:order-1">
+                <img 
+                  src={mobileMoneyImage} 
+                  alt="Mobile money contributions" 
+                  className="rounded-2xl shadow-2xl w-full h-auto"
+                />
+                <div className="absolute -inset-4 bg-gradient-to-r from-kenyan-gold/20 to-kenyan-green/10 rounded-3xl blur-2xl -z-10"></div>
+                <div className="absolute top-4 left-4 w-16 h-16 bg-gradient-to-r from-kenyan-gold to-kenyan-green rounded-2xl flex items-center justify-center shadow-xl">
+                  <Wallet className="h-8 w-8 text-kenyan-gold-foreground" />
+                </div>
+              </div>
+              
+              <div className="space-y-6 order-1 lg:order-2">
+                <div className="flex items-center space-x-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-kenyan-gold to-kenyan-green rounded-full flex items-center justify-center text-kenyan-gold-foreground font-bold text-lg">
+                    2
+                  </div>
+                  <h3 className="text-2xl lg:text-3xl font-bold text-foreground">
+                    Make Contributions Seamlessly
+                  </h3>
+                </div>
+                <p className="text-lg text-muted-foreground">
+                  Use M-Pesa, Airtel Money, or bank transfers to contribute to your chama's central wallet. 
+                  Track your contributions in real-time and never miss a payment deadline.
+                </p>
+                <div className="space-y-3">
+                  <div className="flex items-center space-x-3">
+                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0" />
+                    <span className="text-foreground">STK Push integration</span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0" />
+                    <span className="text-foreground">Automated contribution tracking</span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0" />
+                    <span className="text-foreground">Payment reminders & notifications</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Step 3: Track & Manage */}
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div className="space-y-6">
+                <div className="flex items-center space-x-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-primary to-kenyan-navy rounded-full flex items-center justify-center text-primary-foreground font-bold text-lg">
+                    3
+                  </div>
+                  <h3 className="text-2xl lg:text-3xl font-bold text-foreground">
+                    Track Progress & Analytics
+                  </h3>
+                </div>
+                <p className="text-lg text-muted-foreground">
+                  Monitor your chama's financial health with real-time analytics, contribution leaderboards, 
+                  and transparent reporting that keeps everyone informed and accountable.
+                </p>
+                <div className="space-y-3">
+                  <div className="flex items-center space-x-3">
+                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0" />
+                    <span className="text-foreground">Real-time financial dashboards</span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0" />
+                    <span className="text-foreground">Member contribution rankings</span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0" />
+                    <span className="text-foreground">Automated financial reports</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="relative">
+                <img 
+                  src={financialSuccessImage} 
+                  alt="Financial analytics and tracking" 
+                  className="rounded-2xl shadow-2xl w-full h-auto"
+                />
+                <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-kenyan-navy/10 rounded-3xl blur-2xl -z-10"></div>
+                <div className="absolute top-4 right-4 w-16 h-16 bg-gradient-to-r from-primary to-kenyan-navy rounded-2xl flex items-center justify-center shadow-xl">
+                  <TrendingUp className="h-8 w-8 text-primary-foreground" />
+                </div>
+              </div>
+            </div>
+
+            {/* Step 4: Loans & Payouts */}
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div className="relative order-2 lg:order-1">
+                <img 
+                  src={walletFeatureImage} 
+                  alt="Digital wallet and loan management" 
+                  className="rounded-2xl shadow-2xl w-full h-auto"
+                />
+                <div className="absolute -inset-4 bg-gradient-to-r from-kenyan-green/20 to-kenyan-gold/10 rounded-3xl blur-2xl -z-10"></div>
+                <div className="absolute top-4 left-4 w-16 h-16 bg-gradient-to-r from-kenyan-green to-kenyan-gold rounded-2xl flex items-center justify-center shadow-xl">
+                  <Shield className="h-8 w-8 text-kenyan-green-foreground" />
+                </div>
+              </div>
+              
+              <div className="space-y-6 order-1 lg:order-2">
+                <div className="flex items-center space-x-4">
+                  <div className="w-12 h-12 bg-gradient-to-r from-kenyan-green to-kenyan-gold rounded-full flex items-center justify-center text-kenyan-green-foreground font-bold text-lg">
+                    4
+                  </div>
+                  <h3 className="text-2xl lg:text-3xl font-bold text-foreground">
+                    Access Loans & Receive Payouts
+                  </h3>
+                </div>
+                <p className="text-lg text-muted-foreground">
+                  Apply for loans with AI-powered credit scoring, participate in Merry-Go-Round monthly payouts, 
+                  and withdraw funds to your mobile money or bank account when needed.
+                </p>
+                <div className="space-y-3">
+                  <div className="flex items-center space-x-3">
+                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0" />
+                    <span className="text-foreground">AI credit assessment</span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0" />
+                    <span className="text-foreground">Automated Merry-Go-Round payouts</span>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <CheckCircle className="h-5 w-5 text-primary flex-shrink-0" />
+                    <span className="text-foreground">Instant withdrawals to mobile money</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Cycle Completion Indicator */}
+            <div className="text-center py-12">
+              <div className="inline-flex items-center space-x-4 px-8 py-4 bg-gradient-to-r from-kenyan-green/10 to-kenyan-gold/10 rounded-full border border-kenyan-green/20">
+                <div className="w-8 h-8 bg-gradient-to-r from-kenyan-green to-kenyan-gold rounded-full flex items-center justify-center">
+                  <ArrowRight className="h-4 w-4 text-kenyan-green-foreground animate-pulse" />
+                </div>
+                <span className="text-lg font-semibold text-foreground">The cycle continues, building stronger communities</span>
+                <div className="w-8 h-8 bg-gradient-to-r from-kenyan-gold to-kenyan-green rounded-full flex items-center justify-center">
+                  <Star className="h-4 w-4 text-kenyan-gold-foreground animate-pulse" />
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>
