@@ -72,7 +72,7 @@ const Index = () => {
       {/* Mesh Grid Pattern */}
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjAiIGhlaWdodD0iNjAiIHZpZXdCb3g9IjAgMCA2MCA2MCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGcgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4KPGcgZmlsbD0iIzAwMCIgZmlsbC1vcGFjaXR5PSIwLjAzIj4KPGNpcmNsZSBjeD0iMzAiIGN5PSIzMCIgcj0iMiIvPgo8L2c+CjwvZz4KPC9zdmc+')] opacity-40" />
       
-      <div className="container mx-auto px-6 py-8 space-y-12 relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 py-6 md:py-8 space-y-8 md:space-y-12 relative z-10">
         {/* Enhanced Hero Section */}
         <div className="text-center space-y-8 py-20 relative">
           <div className="flex justify-center mb-12">

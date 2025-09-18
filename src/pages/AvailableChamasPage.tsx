@@ -303,12 +303,12 @@ const AvailableChamasPage: React.FC = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50">
       <Navigation />
       
-      <div className="container mx-auto px-4 py-8">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
+      <div className="container mx-auto px-4 py-6 md:px-6 md:py-8">
+        <div className="mb-6 md:mb-8">
+          <h1 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
             Available Chamas
           </h1>
-          <p className="text-lg text-muted-foreground">
+          <p className="text-base md:text-lg text-muted-foreground">
             Discover and join chamas that match your financial goals and interests
           </p>
         </div>
@@ -322,7 +322,7 @@ const AvailableChamasPage: React.FC = () => {
                 variant={selectedCategory === category ? "default" : "outline"}
                 size="sm"
                 onClick={() => setSelectedCategory(category)}
-                className="mb-2"
+                className="mb-2 text-xs sm:text-sm px-3 py-2"
               >
                 {category}
               </Button>
@@ -331,7 +331,7 @@ const AvailableChamasPage: React.FC = () => {
         </div>
 
         {/* Chamas Grid */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
           {filteredChamas.map((chama) => (
             <Card key={chama.id} className="border-0 shadow-lg hover:shadow-xl transition-all duration-300">
               <CardHeader>

@@ -70,14 +70,14 @@ const ChamasPage: React.FC = () => {
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50">
       <Navigation />
       
-      <div className="container mx-auto px-4 py-8 space-y-6">
-        <div className="flex justify-between items-center">
+      <div className="container mx-auto px-4 py-6 md:px-6 md:py-8 space-y-6">
+        <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
           <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-blue-600 to-green-600 bg-clip-text text-transparent">
             Digital Chamas
           </h1>
           <Button 
             onClick={() => setShowCreateForm(true)} 
-            className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700"
+            className="flex items-center gap-2 bg-gradient-to-r from-blue-600 to-green-600 hover:from-blue-700 hover:to-green-700 w-full sm:w-auto"
           >
             <Plus className="h-4 w-4" />
             Create Chama
@@ -85,11 +85,11 @@ const ChamasPage: React.FC = () => {
         </div>
 
         <Tabs defaultValue="my-chamas" className="w-full">
-          <TabsList className="grid w-full grid-cols-4 bg-white/50 backdrop-blur-sm">
-            <TabsTrigger value="my-chamas">My Chamas</TabsTrigger>
-            <TabsTrigger value="available">Available Chamas</TabsTrigger>
-            <TabsTrigger value="discover">Discover</TabsTrigger>
-            <TabsTrigger value="analytics">Analytics</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 bg-white/50 backdrop-blur-sm gap-1 p-1">
+            <TabsTrigger value="my-chamas" className="text-xs sm:text-sm">My Chamas</TabsTrigger>
+            <TabsTrigger value="available" className="text-xs sm:text-sm">Available</TabsTrigger>
+            <TabsTrigger value="discover" className="text-xs sm:text-sm">Discover</TabsTrigger>
+            <TabsTrigger value="analytics" className="text-xs sm:text-sm">Analytics</TabsTrigger>
           </TabsList>
 
           <TabsContent value="my-chamas" className="space-y-4">
