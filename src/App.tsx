@@ -6,7 +6,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { LanguageProvider } from "@/contexts/LanguageContext";
 import { AuthProvider, useAuth } from "@/hooks/useAuth";
-import NewAppLayout from "@/components/NewAppLayout";
+import VerticalNavigation from "@/components/VerticalNavigation";
+import HorizontalSubNav from "@/components/HorizontalSubNav";
 
 // Page imports
 import Index from "./pages/Index";
@@ -44,8 +45,78 @@ import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
 
+// Sub-navigation configurations
+const getSubNavItems = (pathname: string) => {
+  if (pathname.startsWith('/chamas') || pathname === '/create-chama' || pathname === '/join-chama' || pathname === '/advanced-chama' || pathname === '/available-chamas') {
+    return [
+      { title: 'My Chamas', path: '/chamas', description: 'View and manage your chamas' },
+      { title: 'Available Chamas', path: '/available-chamas', badge: 'New', description: 'Browse and join chamas' },
+      { title: 'Create Chama', path: '/create-chama', description: 'Start a new chama' },
+      { title: 'Join Chama', path: '/join-chama', description: 'Join an existing chama' },
+      { title: 'Advanced Features', path: '/advanced-chama', badge: 'Pro', description: 'Advanced chama management' },
+    ];
+  }
+  
+  if (pathname.startsWith('/investment') || pathname === '/staking' || pathname === '/p2p-trading') {
+    return [
+      { title: 'Portfolio', path: '/investment', description: 'Investment portfolio' },
+      { title: 'Staking', path: '/staking', badge: 'Earn', description: 'Stake and earn rewards' },
+      { title: 'P2P Trading', path: '/p2p-trading', description: 'Peer-to-peer trading' },
+    ];
+  }
+  
+  if (pathname.startsWith('/smart-wallet') || pathname === '/mobile-money' || pathname === '/personal-savings') {
+    return [
+      { title: 'Smart Wallet', path: '/smart-wallet', badge: 'AI', description: 'AI-powered wallet management' },
+      { title: 'Mobile Money', path: '/mobile-money', description: 'M-Pesa integration' },
+      { title: 'Personal Savings', path: '/personal-savings', badge: 'New', description: 'Personal savings & lending' },
+    ];
+  }
+  
+  if (pathname.startsWith('/loan-management') || pathname === '/adaptive-credit' || pathname === '/blockchain-lending' || pathname === '/apply-loan') {
+    return [
+      { title: 'Apply for Loan', path: '/apply-loan', badge: 'New', description: 'Apply for a chama loan' },
+      { title: 'My Loans', path: '/loan-management', description: 'Manage your loans' },
+      { title: 'Adaptive Credit', path: '/adaptive-credit', badge: 'Smart', description: 'AI-powered credit scoring' },
+      { title: 'Blockchain Lending', path: '/blockchain-lending', badge: 'DeFi', description: 'Decentralized lending' },
+    ];
+  }
+  
+  if (pathname.startsWith('/community-hub') || pathname === '/community-networking' || pathname === '/voting-system' || pathname === '/financial-navigator') {
+    return [
+      { title: 'Community Hub', path: '/community-hub', description: 'Community features' },
+      { title: 'Networking', path: '/community-networking', badge: 'New', description: 'Cross-chama networking' },
+      { title: 'Voting System', path: '/voting-system', description: 'Democratic decision making' },
+      { title: 'Financial Navigator', path: '/financial-navigator', badge: 'Guide', description: 'Financial guidance' },
+    ];
+  }
+  
+  return null;
+};
+
 const AppLayout = ({ children }: { children: React.ReactNode }) => {
-  return <NewAppLayout>{children}</NewAppLayout>;
+  const location = useLocation();
+  const subNavItems = getSubNavItems(location.pathname);
+
+  return (
+    <div className="flex h-screen bg-gray-50 relative">
+      <VerticalNavigation />
+      
+      <div className="flex-1 flex flex-col overflow-hidden min-w-0">
+        {subNavItems && (
+          <div className="hidden md:block">
+            <HorizontalSubNav items={subNavItems} />
+          </div>
+        )}
+        
+        <main className="flex-1 overflow-auto p-2 md:p-4">
+          <div className="max-w-full">
+            {children}
+          </div>
+        </main>
+      </div>
+    </div>
+  );
 };
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
