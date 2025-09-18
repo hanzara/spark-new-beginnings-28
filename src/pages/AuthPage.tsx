@@ -45,7 +45,7 @@ const AuthPage: React.FC = () => {
   // Redirect if already authenticated
   useEffect(() => {
     if (user) {
-      navigate('/');
+      navigate('/dashboard');
     }
   }, [user, navigate]);
 
@@ -56,7 +56,7 @@ const AuthPage: React.FC = () => {
     setIsSubmitting(true);
     try {
       await signIn(formData.email, formData.password);
-      navigate('/');
+      navigate('/dashboard');
     } catch (error: any) {
       toast({
         title: "Sign In Failed",
@@ -93,7 +93,7 @@ const AuthPage: React.FC = () => {
     setIsSubmitting(true);
     try {
       await signUp(formData.email, formData.password, formData.fullName);
-      navigate('/');
+      navigate('/dashboard');
     } catch (error: any) {
       toast({
         title: "Sign Up Failed",

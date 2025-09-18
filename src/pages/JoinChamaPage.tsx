@@ -20,7 +20,7 @@ const JoinChamaPage = () => {
     if (token) {
       setInvitationToken(token);
     } else {
-      navigate('/');
+      navigate('/dashboard');
     }
   }, [searchParams, navigate]);
 

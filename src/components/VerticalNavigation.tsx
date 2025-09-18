@@ -35,7 +35,7 @@ const VerticalNavigation = () => {
     {
       title: 'Home',
       icon: Home,
-      path: '/',
+      path: '/dashboard',
       badge: null,
     },
     {

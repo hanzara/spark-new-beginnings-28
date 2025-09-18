@@ -40,7 +40,7 @@ const SchedulePaymentPage = () => {
         title: "Payment Scheduled!",
         description: `${selectedFrequency?.name} payments of ${amount} KES to ${selectedChamaData?.name} starting ${startDate}`,
       });
-      navigate('/');
+      navigate('/dashboard');
     }
   };
 

@@ -145,47 +145,213 @@ function App() {
           <BrowserRouter>
             <AuthProvider>
               <Routes>
-                <Route path="/company" element={<CompanyPage />} />
+                <Route path="/" element={<CompanyPage />} />
                 <Route path="/auth" element={<AuthPage />} />
                 <Route path="/download" element={<AppDownloadPage />} />
-                <Route path="*" element={
+                <Route path="/dashboard" element={
                   <ProtectedRoute>
                     <AppLayout>
-                      <Routes>
-                        <Route path="/" element={<Index />} />
-                        <Route path="/chamas" element={<ChamasPage />} />
-                        <Route path="/available-chamas" element={<AvailableChamasPage />} />
-                        <Route path="/chama/:id" element={<ChamaDetailPage />} />
-                        <Route path="/chama-detail/:id" element={<ChamaDetailPage />} />
-                        <Route path="/create-chama" element={<CreateChamaPage />} />
-                        <Route path="/join-chama" element={<JoinChamaPage />} />
-                        <Route path="/advanced-chama" element={<AdvancedChamaPage />} />
-                        <Route path="/smart-finance" element={<SmartFinancePage />} />
-                        <Route path="/partner-dashboard" element={<PartnerDashboardPage />} />
-                        <Route path="/investment" element={<InvestmentPage />} />
-                        <Route path="/staking" element={<StakingPage />} />
-                        <Route path="/p2p-trading" element={<P2PTradingPage />} />
-                        <Route path="/smart-wallet" element={<SmartWalletPage />} />
-                        <Route path="/mobile-money" element={<MobileMoneyPage />} />
-                        <Route path="/personal-savings" element={<PersonalSavingsPage />} />
-                        <Route path="/apply-loan" element={<ApplyLoanPage />} />
-                        <Route path="/loan-management" element={<LoanManagementPage />} />
-                        <Route path="/adaptive-credit" element={<AdaptiveCreditPage />} />
-                        <Route path="/blockchain-lending" element={<BlockchainLendingPage />} />
-                        <Route path="/analytics" element={<AnalyticsPage />} />
-                        <Route path="/community-hub" element={<CommunityHubPage />} />
-                        <Route path="/community-networking" element={<CommunityNetworkingPage />} />
-                        <Route path="/voting-system" element={<VotingSystemPage />} />
-                        <Route path="/financial-navigator" element={<FinancialNavigatorPage />} />
-                        <Route path="/admin-portal" element={<AdminPortalPage />} />
-                        <Route path="/bank-portal" element={<BankPortalPage />} />
-                        <Route path="/trivia-game" element={<TriviaGamePage />} />
-                        <Route path="/make-contribution" element={<MakeContributionPage />} />
-                        <Route path="*" element={<NotFound />} />
-                      </Routes>
+                      <Index />
                     </AppLayout>
                   </ProtectedRoute>
                 } />
+                <Route path="/chamas" element={
+                  <ProtectedRoute>
+                    <AppLayout>
+                      <ChamasPage />
+                    </AppLayout>
+                  </ProtectedRoute>
+                } />
+                <Route path="/available-chamas" element={
+                  <ProtectedRoute>
+                    <AppLayout>
+                      <AvailableChamasPage />
+                    </AppLayout>
+                  </ProtectedRoute>
+                } />
+                <Route path="/chama/:id" element={
+                  <ProtectedRoute>
+                    <AppLayout>
+                      <ChamaDetailPage />
+                    </AppLayout>
+                  </ProtectedRoute>
+                } />
+                <Route path="/chama-detail/:id" element={
+                  <ProtectedRoute>
+                    <AppLayout>
+                      <ChamaDetailPage />
+                    </AppLayout>
+                  </ProtectedRoute>
+                } />
+                <Route path="/create-chama" element={
+                  <ProtectedRoute>
+                    <AppLayout>
+                      <CreateChamaPage />
+                    </AppLayout>
+                  </ProtectedRoute>
+                } />
+                <Route path="/join-chama" element={
+                  <ProtectedRoute>
+                    <AppLayout>
+                      <JoinChamaPage />
+                    </AppLayout>
+                  </ProtectedRoute>
+                } />
+                <Route path="/advanced-chama" element={
+                  <ProtectedRoute>
+                    <AppLayout>
+                      <AdvancedChamaPage />
+                    </AppLayout>
+                  </ProtectedRoute>
+                } />
+                <Route path="/smart-finance" element={
+                  <ProtectedRoute>
+                    <AppLayout>
+                      <SmartFinancePage />
+                    </AppLayout>
+                  </ProtectedRoute>
+                } />
+                <Route path="/partner-dashboard" element={
+                  <ProtectedRoute>
+                    <AppLayout>
+                      <PartnerDashboardPage />
+                    </AppLayout>
+                  </ProtectedRoute>
+                } />
+                <Route path="/investment" element={
+                  <ProtectedRoute>
+                    <AppLayout>
+                      <InvestmentPage />
+                    </AppLayout>
+                  </ProtectedRoute>
+                } />
+                <Route path="/staking" element={
+                  <ProtectedRoute>
+                    <AppLayout>
+                      <StakingPage />
+                    </AppLayout>
+                  </ProtectedRoute>
+                } />
+                <Route path="/p2p-trading" element={
+                  <ProtectedRoute>
+                    <AppLayout>
+                      <P2PTradingPage />
+                    </AppLayout>
+                  </ProtectedRoute>
+                } />
+                <Route path="/smart-wallet" element={
+                  <ProtectedRoute>
+                    <AppLayout>
+                      <SmartWalletPage />
+                    </AppLayout>
+                  </ProtectedRoute>
+                } />
+                <Route path="/mobile-money" element={
+                  <ProtectedRoute>
+                    <AppLayout>
+                      <MobileMoneyPage />
+                    </AppLayout>
+                  </ProtectedRoute>
+                } />
+                <Route path="/personal-savings" element={
+                  <ProtectedRoute>
+                    <AppLayout>
+                      <PersonalSavingsPage />
+                    </AppLayout>
+                  </ProtectedRoute>
+                } />
+                <Route path="/apply-loan" element={
+                  <ProtectedRoute>
+                    <AppLayout>
+                      <ApplyLoanPage />
+                    </AppLayout>
+                  </ProtectedRoute>
+                } />
+                <Route path="/loan-management" element={
+                  <ProtectedRoute>
+                    <AppLayout>
+                      <LoanManagementPage />
+                    </AppLayout>
+                  </ProtectedRoute>
+                } />
+                <Route path="/adaptive-credit" element={
+                  <ProtectedRoute>
+                    <AppLayout>
+                      <AdaptiveCreditPage />
+                    </AppLayout>
+                  </ProtectedRoute>
+                } />
+                <Route path="/blockchain-lending" element={
+                  <ProtectedRoute>
+                    <AppLayout>
+                      <BlockchainLendingPage />
+                    </AppLayout>
+                  </ProtectedRoute>
+                } />
+                <Route path="/analytics" element={
+                  <ProtectedRoute>
+                    <AppLayout>
+                      <AnalyticsPage />
+                    </AppLayout>
+                  </ProtectedRoute>
+                } />
+                <Route path="/community-hub" element={
+                  <ProtectedRoute>
+                    <AppLayout>
+                      <CommunityHubPage />
+                    </AppLayout>
+                  </ProtectedRoute>
+                } />
+                <Route path="/community-networking" element={
+                  <ProtectedRoute>
+                    <AppLayout>
+                      <CommunityNetworkingPage />
+                    </AppLayout>
+                  </ProtectedRoute>
+                } />
+                <Route path="/voting-system" element={
+                  <ProtectedRoute>
+                    <AppLayout>
+                      <VotingSystemPage />
+                    </AppLayout>
+                  </ProtectedRoute>
+                } />
+                <Route path="/financial-navigator" element={
+                  <ProtectedRoute>
+                    <AppLayout>
+                      <FinancialNavigatorPage />
+                    </AppLayout>
+                  </ProtectedRoute>
+                } />
+                <Route path="/admin-portal" element={
+                  <ProtectedRoute>
+                    <AppLayout>
+                      <AdminPortalPage />
+                    </AppLayout>
+                  </ProtectedRoute>
+                } />
+                <Route path="/bank-portal" element={
+                  <ProtectedRoute>
+                    <AppLayout>
+                      <BankPortalPage />
+                    </AppLayout>
+                  </ProtectedRoute>
+                } />
+                <Route path="/trivia-game" element={
+                  <ProtectedRoute>
+                    <AppLayout>
+                      <TriviaGamePage />
+                    </AppLayout>
+                  </ProtectedRoute>
+                } />
+                <Route path="/make-contribution" element={
+                  <ProtectedRoute>
+                    <AppLayout>
+                      <MakeContributionPage />
+                    </AppLayout>
+                  </ProtectedRoute>
+                } />
+                <Route path="*" element={<NotFound />} />
               </Routes>
             </AuthProvider>
           </BrowserRouter>

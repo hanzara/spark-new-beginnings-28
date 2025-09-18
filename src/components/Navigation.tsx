@@ -33,7 +33,7 @@ const Navigation = () => {
   const handleSignOut = async () => {
     try {
       await signOut();
-      navigate('/');
+      navigate('/dashboard');
     } catch (error) {
       console.error('Error signing out:', error);
     }
@@ -116,7 +116,7 @@ const Navigation = () => {
             {/* Center: Brand Logo */}
             <div 
               className="font-bold text-xl bg-gradient-to-r from-kenyan-green to-kenyan-gold bg-clip-text text-transparent cursor-pointer hover:opacity-80 transition-opacity"
-              onClick={() => navigate('/')}
+              onClick={() => navigate('/dashboard')}
             >
               ChamaVault
             </div>
