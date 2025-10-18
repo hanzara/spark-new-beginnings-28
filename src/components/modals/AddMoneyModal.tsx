@@ -30,7 +30,6 @@ export const AddMoneyModal: React.FC<AddMoneyModalProps> = ({ isOpen, onClose, o
   const { user } = useAuth();
   const { toast } = useToast();
   const { initializePayment: initializePaystackPayment, isProcessingPayment: isProcessingPaystack } = usePaystackIntegration();
-  const { initiatePayment: initiateAirtelPayment, isProcessingPayment: isProcessingAirtel } = useAirtelMoney();
   const [amount, setAmount] = useState('');
   const [paymentMethod, setPaymentMethod] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
@@ -98,27 +97,17 @@ export const AddMoneyModal: React.FC<AddMoneyModalProps> = ({ isOpen, onClose, o
     try {
       const selectedMethod = paymentMethods.find(m => m.id === paymentMethod);
       
-      // Route Airtel Money to dedicated integration
-      if (paymentMethod === 'airtel_money') {
-        await initiateAirtelPayment.mutateAsync({
-          phoneNumber: formattedPhone,
-          amount: numericAmount,
-          purpose: 'wallet_topup',
-          description: `Wallet top-up via Airtel Money`
-        });
-      } else {
-        // Route M-Pesa and cards through Paystack
-        await initializePaystackPayment.mutateAsync({
-          email: user?.email,
-          amount: numericAmount,
-          purpose: 'other',
-          description: `Wallet top-up via ${selectedMethod?.name}`,
-          phoneNumber: formattedPhone || undefined,
-          channels: paymentMethod === 'mobile_money'
-            ? ['mobile_money'] 
-            : ['card', 'bank', 'ussd', 'bank_transfer']
-        });
-      }
+      // Route all mobile money (M-Pesa & Airtel) and cards through Paystack
+      await initializePaystackPayment.mutateAsync({
+        email: user?.email,
+        amount: numericAmount,
+        purpose: 'other',
+        description: `Wallet top-up via ${selectedMethod?.name}`,
+        phoneNumber: formattedPhone || undefined,
+        channels: (paymentMethod === 'mobile_money' || paymentMethod === 'airtel_money')
+          ? ['mobile_money'] 
+          : ['card', 'bank', 'ussd', 'bank_transfer']
+      });
 
       toast({
         title: "Payment Initiated",
@@ -143,7 +132,7 @@ export const AddMoneyModal: React.FC<AddMoneyModalProps> = ({ isOpen, onClose, o
   };
 
   const selectedMethod = paymentMethods.find(method => method.id === paymentMethod);
-  const isLoading = isProcessingPaystack || isProcessingAirtel;
+  const isLoading = isProcessingPaystack;
 
   return (
     <>
