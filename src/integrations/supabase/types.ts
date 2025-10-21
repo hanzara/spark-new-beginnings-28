@@ -1221,6 +1221,11 @@ export type Database = {
           mgr_balance: number | null
           mgr_turn_date: string | null
           mgr_turn_order: number | null
+          payment_amount: number | null
+          payment_date: string | null
+          payment_method: string | null
+          payment_reference: string | null
+          payment_status: string | null
           role: string | null
           savings_balance: number | null
           total_contributed: number | null
@@ -1238,6 +1243,11 @@ export type Database = {
           mgr_balance?: number | null
           mgr_turn_date?: string | null
           mgr_turn_order?: number | null
+          payment_amount?: number | null
+          payment_date?: string | null
+          payment_method?: string | null
+          payment_reference?: string | null
+          payment_status?: string | null
           role?: string | null
           savings_balance?: number | null
           total_contributed?: number | null
@@ -1255,6 +1265,11 @@ export type Database = {
           mgr_balance?: number | null
           mgr_turn_date?: string | null
           mgr_turn_order?: number | null
+          payment_amount?: number | null
+          payment_date?: string | null
+          payment_method?: string | null
+          payment_reference?: string | null
+          payment_status?: string | null
           role?: string | null
           savings_balance?: number | null
           total_contributed?: number | null
@@ -1451,6 +1466,76 @@ export type Database = {
             columns: ["chama_id"]
             isOneToOne: false
             referencedRelation: "chamas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      chama_payment_verifications: {
+        Row: {
+          amount: number
+          chama_id: string
+          created_at: string | null
+          expires_at: string | null
+          id: string
+          membership_id: string | null
+          payment_method: string
+          payment_reference: string
+          payment_status: string
+          updated_at: string | null
+          user_id: string
+          verification_data: Json | null
+          verified_at: string | null
+        }
+        Insert: {
+          amount: number
+          chama_id: string
+          created_at?: string | null
+          expires_at?: string | null
+          id?: string
+          membership_id?: string | null
+          payment_method: string
+          payment_reference: string
+          payment_status?: string
+          updated_at?: string | null
+          user_id: string
+          verification_data?: Json | null
+          verified_at?: string | null
+        }
+        Update: {
+          amount?: number
+          chama_id?: string
+          created_at?: string | null
+          expires_at?: string | null
+          id?: string
+          membership_id?: string | null
+          payment_method?: string
+          payment_reference?: string
+          payment_status?: string
+          updated_at?: string | null
+          user_id?: string
+          verification_data?: Json | null
+          verified_at?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "chama_payment_verifications_chama_id_fkey"
+            columns: ["chama_id"]
+            isOneToOne: false
+            referencedRelation: "chamas"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "chama_payment_verifications_membership_id_fkey"
+            columns: ["membership_id"]
+            isOneToOne: false
+            referencedRelation: "chama_leaderboard"
+            referencedColumns: ["member_id"]
+          },
+          {
+            foreignKeyName: "chama_payment_verifications_membership_id_fkey"
+            columns: ["membership_id"]
+            isOneToOne: false
+            referencedRelation: "chama_members"
             referencedColumns: ["id"]
           },
         ]
@@ -1755,12 +1840,14 @@ export type Database = {
           funds_locked: boolean | null
           id: string
           is_marketplace_chama: boolean | null
+          joining_fee: number | null
           logo_url: string | null
           max_members: number | null
           name: string
           purchase_amount: number | null
           purchased_at: string | null
           purchased_by: string | null
+          require_payment: boolean | null
           rules: string | null
           schedule: Json | null
           settings: Json | null
@@ -1780,12 +1867,14 @@ export type Database = {
           funds_locked?: boolean | null
           id?: string
           is_marketplace_chama?: boolean | null
+          joining_fee?: number | null
           logo_url?: string | null
           max_members?: number | null
           name: string
           purchase_amount?: number | null
           purchased_at?: string | null
           purchased_by?: string | null
+          require_payment?: boolean | null
           rules?: string | null
           schedule?: Json | null
           settings?: Json | null
@@ -1805,12 +1894,14 @@ export type Database = {
           funds_locked?: boolean | null
           id?: string
           is_marketplace_chama?: boolean | null
+          joining_fee?: number | null
           logo_url?: string | null
           max_members?: number | null
           name?: string
           purchase_amount?: number | null
           purchased_at?: string | null
           purchased_by?: string | null
+          require_payment?: boolean | null
           rules?: string | null
           schedule?: Json | null
           settings?: Json | null
@@ -8394,6 +8485,10 @@ export type Database = {
         }
         Returns: string
       }
+      mark_payment_failed: {
+        Args: { p_failure_reason: string; p_payment_reference: string }
+        Returns: Json
+      }
       process_loan_repayment: {
         Args: {
           payment_amount: number
@@ -8533,6 +8628,15 @@ export type Database = {
       update_chama_metrics: {
         Args: { target_chama_id: string }
         Returns: undefined
+      }
+      verify_chama_payment: {
+        Args: {
+          p_amount: number
+          p_payment_method: string
+          p_payment_reference: string
+          p_verification_data: Json
+        }
+        Returns: Json
       }
       verify_portal_session: {
         Args: { p_session_token: string }

@@ -31,7 +31,7 @@ serve(async (req) => {
     const { CheckoutRequestID, ResultCode, ResultDesc } = stkCallback;
 
     // Update transaction status
-    const { error: updateError } = await supabase
+    const { data: transaction, error: updateError } = await supabase
       .from('mpesa_transactions')
       .update({
         result_code: ResultCode,
@@ -40,10 +40,49 @@ serve(async (req) => {
         callback_data: callbackData,
         updated_at: new Date().toISOString()
       })
-      .eq('checkout_request_id', CheckoutRequestID);
+      .eq('checkout_request_id', CheckoutRequestID)
+      .select()
+      .single();
 
     if (updateError) {
       console.error('Error updating transaction:', updateError);
+    }
+
+    // If payment successful and for chama joining, verify the payment
+    if (ResultCode === 0 && transaction) {
+      const { CallbackMetadata } = stkCallback;
+      const items = CallbackMetadata?.Item || [];
+      const amountItem = items.find((item: any) => item.Name === 'Amount');
+      const amount = amountItem?.Value || transaction.amount;
+
+      // Check if this is a chama payment
+      if (transaction.purpose === 'chama_joining' || transaction.purpose === 'chama_payment') {
+        console.log('Verifying chama payment:', CheckoutRequestID);
+        
+        const { data: verifyResult, error: verifyError } = await supabase
+          .rpc('verify_chama_payment', {
+            p_payment_reference: CheckoutRequestID,
+            p_amount: amount,
+            p_payment_method: 'mpesa',
+            p_verification_data: callbackData
+          });
+
+        if (verifyError) {
+          console.error('Error verifying chama payment:', verifyError);
+        } else {
+          console.log('Chama payment verified:', verifyResult);
+        }
+      }
+    }
+
+    // Handle failed payments
+    if (ResultCode !== 0 && transaction) {
+      if (transaction.purpose === 'chama_joining' || transaction.purpose === 'chama_payment') {
+        await supabase.rpc('mark_payment_failed', {
+          p_payment_reference: CheckoutRequestID,
+          p_failure_reason: ResultDesc || 'Payment failed'
+        });
+      }
     }
 
     return new Response('OK', { status: 200, headers: corsHeaders });

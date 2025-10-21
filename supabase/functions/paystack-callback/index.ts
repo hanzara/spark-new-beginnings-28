@@ -92,6 +92,25 @@ serve(async (req) => {
         console.error('Error updating transaction:', updateError);
       }
 
+      // Verify chama payment if applicable
+      if (transaction && (transaction.purpose === 'chama_joining' || transaction.purpose === 'chama_payment')) {
+        console.log('Verifying chama payment:', reference);
+        
+        const { data: verifyResult, error: verifyError } = await supabase
+          .rpc('verify_chama_payment', {
+            p_payment_reference: reference,
+            p_amount: amountPaid,
+            p_payment_method: channel,
+            p_verification_data: callbackData
+          });
+
+        if (verifyError) {
+          console.error('Error verifying chama payment:', verifyError);
+        } else {
+          console.log('Chama payment verified successfully:', verifyResult);
+        }
+      }
+
       if (transaction) {
         console.log('Processing payment:', { amountPaid, platformFee, netAmount, purpose: transaction.purpose, channel });
 
@@ -245,9 +264,17 @@ serve(async (req) => {
       // Fetch user from transaction
       const { data: transaction } = await supabase
         .from('mpesa_transactions')
-        .select('user_id, chama_id, amount')
+        .select('user_id, chama_id, amount, purpose')
         .eq('checkout_request_id', reference)
         .single();
+
+      // Mark chama payment as failed if applicable
+      if (transaction && (transaction.purpose === 'chama_joining' || transaction.purpose === 'chama_payment')) {
+        await supabase.rpc('mark_payment_failed', {
+          p_payment_reference: reference,
+          p_failure_reason: userMessage
+        });
+      }
 
       // Send notification to user about the failure
       if (transaction?.user_id) {
